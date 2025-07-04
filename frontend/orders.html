@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Orders</title></head>
+<body>
+  <h1>Order History</h1>
+  <div id="orders"></div>
+
+  <script>
+    async function loadOrders() {
+      const res = await fetch('/orders', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+      const orders = await res.json();
+      const container = document.getElementById('orders');
+      container.innerHTML = orders.map(order => `
+        <div>
+          <h3>Order ID: ${order.id}</h3>
+          Total: ₹${order.totalPrice}<br>
+          Items: <pre>${JSON.stringify(order.items, null, 2)}</pre>
+        </div>`).join('');
+    }
+    loadOrders();
+  </script>
+</body>
+</html>

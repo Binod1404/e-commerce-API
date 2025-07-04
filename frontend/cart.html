@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Cart</title></head>
+<body>
+  <h1>Your Shopping Cart</h1>
+  <div id="cart-items"></div>
+
+  <button id="place-order-btn">Place Order</button>
+
+  <script>
+    async function loadCart() {
+      const res = await fetch('/cart', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
+      const items = await res.json();
+      const container = document.getElementById('cart-items');
+
+      if (items.length === 0) {
+        container.innerHTML = '<p>Your cart is empty.</p>';
+        document.getElementById('place-order-btn').style.display = 'none';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div>
+          Product ID: ${item.productId} | Quantity: ${item.quantity}
+        </div>`).join('');
+    }
+
+    async function placeOrder() {
+      const res = await fetch('/orders', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Order placed successfully!');
+        loadCart(); // reload cart (now empty)
+      } else {
+        alert('Error placing order: ' + data.message);
+      }
+    }
+
+    document.getElementById('place-order-btn').addEventListener('click', placeOrder);
+    loadCart();
+  </script>
+</body>
+</html>

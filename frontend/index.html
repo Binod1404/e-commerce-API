@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+  <style>
+    #top-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Products</h1>
+
+  <!-- ✅ Navigation Buttons -->
+  <div id="top-bar">
+    <button onclick="window.location.href='cart.html'">🛒 Cart</button>
+    <button onclick="window.location.href='orders.html'">👤 Profile</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <div id="product-list"></div>
+
+  <script type="module">
+    import { fetchProducts } from './js/api.js';
+
+    fetchProducts().then(products => {
+      const container = document.getElementById('product-list');
+      container.innerHTML = products.map(p => `
+        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+          <h3>${p.name}</h3>
+          <p>${p.description}</p>
+          <p><strong>₹${p.price}</strong></p>
+          <button onclick="addToCart(${p.id})">Add to Cart</button>
+        </div>
+      `).join('');
+    });
+
+    window.addToCart = function(productId) {
+      fetch('/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({ productId, quantity: 1 })
+      })
+        .then(res => res.json())
+        .then(() => alert('Added to cart'));
+    };
+
+    window.logout = function() {
+      localStorage.removeItem('token');
+      alert('Logged out!');
+      window.location.href = 'login.html';
+    };
+  </script>
+</body>
+</html>
