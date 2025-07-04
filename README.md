@@ -23,12 +23,12 @@ Getting Started
   Create a PostgreSQL database (e.g. ecommerce)
   Make sure PostgreSQL is running
 
-3. Configure environment variables
+4. Configure environment variables
   Rename .env.example to .env
 
   Fill in your DB credentials
 
-4. Install dependencies & start the server
+5. Install dependencies & start the server
   npm install
   node server.js
 This will:
@@ -39,7 +39,7 @@ Serve API at http://localhost:5000
 
 Serve frontend from /frontend
 
-5. Open the frontend in browser
+6. Open the frontend in browser
   http://localhost:5000/index.html
   Also visit: login.html, register.html, cart.html, admin.html, etc.
 
