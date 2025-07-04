@@ -24,11 +24,13 @@ Getting Started
   Make sure PostgreSQL is running
 
 4. Configure environment variables
+   
   Rename .env.example to .env
 
   Fill in your DB credentials
 
 5. Install dependencies & start the server
+
   npm install
 
   node server.js
@@ -52,7 +54,9 @@ To populate your database with sample users and products, follow these steps:
 
 
 🔧 Step 2: Run the seed script
+
   node seed.js
+  
 This will:
 
 Sync your database schema (drops existing tables)
