@@ -43,4 +43,33 @@ Serve frontend from /frontend
   http://localhost:5000/index.html
   Also visit: login.html, register.html, cart.html, admin.html, etc.
 
+Seeding the Database (Optional but Recommended)
+To populate your database with sample users and products, follow these steps:
+
+🔧 Step 1: Make sure your PostgreSQL server is running
+
+
+🔧 Step 2: Run the seed script
+  node seed.js
+This will:
+
+Sync your database schema (drops existing tables)
+
+Create:
+
+✅ 1 Admin user (admin@example.com / password123)
+
+✅ 1 Customer user (customer@example.com / password123)
+
+✅ 3 sample products
+
+⚠️ Note: This will clear all existing data using { force: true }. Remove force: true if you don’t want that.
+
+🔐 Login Credentials Created
+Role	Email	Password
+Admin	admin@example.com	password123
+Customer	customer@example.com	password123
+
+
+
 
