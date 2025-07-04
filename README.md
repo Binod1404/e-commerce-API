@@ -30,7 +30,9 @@ Getting Started
 
 5. Install dependencies & start the server
   npm install
+
   node server.js
+  
 This will:
 
 Sync tables
