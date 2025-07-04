@@ -78,5 +78,5 @@ Customer	customer@example.com	password123
 
 
 
-![App preview]([https://i.imgur.com/abc123.png](https://drive.google.com/file/d/1jpsI_Z97TGuqzgyeG_o55KB2l3p_BUOO/view?usp=sharing))
+
 
